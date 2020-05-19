@@ -2,6 +2,18 @@ FROM ubuntu:20.04
 
 WORKDIR /tmp
 
+# The Ubuntu 20.04 docker images exludes docs and man pages on install.
+# I want them. Now get back what we lost
+COPY unminimize /tmp/unminimize
+RUN /tmp/unminimize
+
+# docker.io doesn't setup so that `service docker start` will work.
+# Fix that
+COPY docker /etc/init.d/docker
+
+# Ok, let's get at it now that we've addressed the fuckery
+
+
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update \
@@ -21,6 +33,8 @@ RUN apt-get update \
   lldb \
   locales-all \
   make \
+  man \
+  manpages-posix\
   shellcheck \
   software-properties-common \
   sudo \
