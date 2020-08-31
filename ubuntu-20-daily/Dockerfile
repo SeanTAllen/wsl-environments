@@ -11,8 +11,8 @@ RUN /tmp/unminimize
 # Fix that
 COPY docker /etc/init.d/docker
 
-# Ok, let's get at it now that we've addressed the fuckery
-
+# allow user name 'sean' to run hwclock -s without password
+COPY sean_hwclock /etc/sudoers.d/
 
 ENV DEBIAN_FRONTEND noninteractive
 
