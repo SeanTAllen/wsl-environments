@@ -14,6 +14,9 @@ COPY docker /etc/init.d/docker
 # allow user name 'sean' to run hwclock -s without password
 COPY sean_hwclock /etc/sudoers.d/
 
+# set wsl configuration
+COPY wsl.conf /etc/wsl.conf
+
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update \
