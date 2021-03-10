@@ -57,6 +57,7 @@ USER sean
 
 RUN mkdir -p ~/code/ponylang \
  && mkdir -p ~/code/seantallen \
+ && mkdir -p ~/code/seantallen-org \
  && mkdir -p ~/bin \
  && mkdir -p ~/pony-scratch \
  && mkdir -p ~/tmp \
