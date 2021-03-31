@@ -29,6 +29,7 @@ RUN apt-get update \
   docker.io \
   fish \
   git \
+  gpg \
   htop \
   jq \
   libpcre2-dev \
