@@ -28,6 +28,7 @@ RUN apt-get update \
   curl \
   docker.io \
   fish \
+  fzf \
   git \
   gpg \
   htop \
