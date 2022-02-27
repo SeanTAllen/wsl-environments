@@ -42,6 +42,7 @@ RUN apt-get update \
   shellcheck \
   software-properties-common \
   sudo \
+  tree \
   vim \
   wget \
   yadm
