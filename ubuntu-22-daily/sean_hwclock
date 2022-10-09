@@ -1,0 +1,1 @@
+sean ALL=(ALL) NOPASSWD: /usr/sbin/hwclock
