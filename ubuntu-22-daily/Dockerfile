@@ -83,7 +83,7 @@ RUN wget https://github.com/gohugoio/hugo/releases/download/v0.24.1/hugo_0.24.1_
 # ponyup
 ENV PATH "/home/sean/.local/share/ponyup/bin:$PATH"
 RUN curl -s --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/ponylang/ponyup/master/ponyup-init.sh | bash \
- && ponyup default x86_64-linux-ubuntu20.04 \
+ && ponyup default x86_64-linux-ubuntu22.04 \
  && ponyup update ponyc release \
  && ponyup update corral release \
  && ponyup update changelog-tool release
