@@ -29,8 +29,10 @@ RUN pacman -Syyu --noconfirm \
   shellcheck \
   starship \
   sudo \
+  systemd \
   vim \
   wget \
+  which \
   yadm
 
 RUN groupadd sean \
