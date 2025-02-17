@@ -3,6 +3,7 @@ FROM archlinux:base
 LABEL org.opencontainers.image.source="https://github.com/seantallen/wsl-environments"
 
 COPY wsl.conf /etc/wsl.conf
+COPY pacman.conf /etc/pacman.conf
 
 RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
  && locale-gen
