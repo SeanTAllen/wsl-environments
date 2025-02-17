@@ -16,6 +16,7 @@ RUN pacman -Syyu --noconfirm \
   cmake \
   curl \
   docker \
+  docker-buildx \
   fish \
   fisher \
   git \
