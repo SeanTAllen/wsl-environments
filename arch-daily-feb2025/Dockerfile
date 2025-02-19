@@ -24,6 +24,7 @@ RUN pacman -Syyu --noconfirm \
   gnupg \
   htop \
   lldb \
+  lsof \
   make \
   openssh \
   openssl \
