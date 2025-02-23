@@ -16,6 +16,7 @@ RUN pacman -Syyu --noconfirm \
   clang \
   cmake \
   curl \
+  dnsutils \
   docker \
   docker-buildx \
   fish \
