@@ -70,3 +70,5 @@ RUN rm -rf /home/sean/tmp/*
 RUN yadm clone https://github.com/SeanTAllen/yadm-dotfiles.git \
  && yadm checkout /home/sean \
  && fish -c "fisher install jethrokuan/z"
+
+RUN ln -s /usr/sbin/pinentry-tty ~/pinentry-tty
