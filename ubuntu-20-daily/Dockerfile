@@ -17,6 +17,10 @@ COPY sean_hwclock /etc/sudoers.d/
 # set wsl configuration
 COPY wsl.conf /etc/wsl.conf
 
+# We need to have docker set as group 107 for docker in docker with
+# my dev-enviroments to work
+RUN groupadd -g 107 docker
+
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update \

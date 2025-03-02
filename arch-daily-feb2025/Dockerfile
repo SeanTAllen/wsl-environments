@@ -6,6 +6,10 @@ COPY nsswitch.conf /etc/nsswitch.conf
 COPY pacman.conf /etc/pacman.conf
 COPY wsl.conf /etc/wsl.conf
 
+# We need to have docker set as group 107 for docker in docker with
+# my dev-enviroments to work
+RUN groupadd -g 107 docker
+
 RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
  && locale-gen
 
