@@ -39,6 +39,7 @@ RUN pacman -Syyu --noconfirm \
   starship \
   sudo \
   systemd \
+  unzip \
   vim \
   wget \
   which \
