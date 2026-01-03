@@ -6,6 +6,9 @@ COPY nsswitch.conf /etc/nsswitch.conf
 COPY pacman.conf /etc/pacman.conf
 COPY wsl.conf /etc/wsl.conf
 
+# Remove dead community repo from pacman if it is still there in the image
+RUN sed -i '/^\[community\]/,/^$/d' /etc/pacman.conf
+
 # We need to have docker set as group 107 for docker in docker with
 # my dev-enviroments to work
 RUN groupadd -g 107 docker
@@ -69,6 +72,10 @@ RUN git clone https://github.com/b3niup/numbers.vim.git ~/.vim/pack/numbers/star
 RUN git clone https://github.com/dleonard0/pony-vim-syntax.git ~/.vim/pack/pony-vim-syntax/start/pony-vim-syntax
 
 WORKDIR /home/sean
+
+RUN mkdir -p .local/share/fonts
+COPY RobotoMono-Italic-VariableFont_wght.ttf .local/share/fonts/
+COPY RobotoMono-VariableFont_wght.ttf .local/share/fonts/
 
 RUN rm -rf /home/sean/tmp/*
 
