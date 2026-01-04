@@ -42,7 +42,7 @@ RUN pacman -Syyu --noconfirm \
   starship \
   sudo \
   systemd \
-  unzip \
+  ttf-roboto-mono \
   vim \
   wget \
   which \
@@ -72,10 +72,6 @@ RUN git clone https://github.com/b3niup/numbers.vim.git ~/.vim/pack/numbers/star
 RUN git clone https://github.com/dleonard0/pony-vim-syntax.git ~/.vim/pack/pony-vim-syntax/start/pony-vim-syntax
 
 WORKDIR /home/sean
-
-RUN mkdir -p .local/share/fonts
-COPY RobotoMono-Italic-VariableFont_wght.ttf .local/share/fonts/
-COPY RobotoMono-VariableFont_wght.ttf .local/share/fonts/
 
 RUN rm -rf /home/sean/tmp/*
 
