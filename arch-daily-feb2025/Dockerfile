@@ -43,6 +43,7 @@ RUN pacman -Syyu --noconfirm \
   sudo \
   systemd \
   ttf-roboto-mono \
+  ttf-roboto-mono-nerd \
   vim \
   wget \
   which \
