@@ -27,6 +27,7 @@ RUN pacman -Syyu --noconfirm \
   dnsutils \
   docker \
   docker-buildx \
+  fd \
   fish \
   fisher \
   git \
