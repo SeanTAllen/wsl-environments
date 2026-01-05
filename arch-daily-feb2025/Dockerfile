@@ -43,6 +43,7 @@ RUN pacman -Syyu --noconfirm \
   starship \
   sudo \
   systemd \
+  ttf-nerd-fonts-symbols \
   ttf-roboto-mono \
   ttf-roboto-mono-nerd \
   vim \
