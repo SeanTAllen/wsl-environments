@@ -20,6 +20,7 @@ RUN pacman -Syyu --noconfirm \
  && pacman -S --noconfirm \
   man \
   man-pages \
+  adobe-source-code-pro-fonts \
   atuin \
   clang \
   cmake \
