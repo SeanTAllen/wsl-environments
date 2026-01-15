@@ -20,6 +20,7 @@ RUN pacman -Syyu --noconfirm \
  && pacman -S --noconfirm \
   man \
   man-pages \
+  7zip \
   adobe-source-code-pro-fonts \
   atuin \
   clang \
@@ -31,15 +32,18 @@ RUN pacman -Syyu --noconfirm \
   fd \
   fish \
   fisher \
+  fzf \
   git \
   gnupg \
   htop \
+  jq \
   lldb \
   lsof \
   make \
   openssh \
   openssl \
   pcre2 \
+  ripgrep \
   shellcheck \
   starship \
   sudo \
@@ -50,7 +54,9 @@ RUN pacman -Syyu --noconfirm \
   vim \
   wget \
   which \
-  yadm
+  yadm \
+  yazi \
+  zoxide
 
 RUN groupadd sean \
  && useradd -ms /usr/bin/fish -d /home/sean -G adm,docker,wheel -g sean sean \
