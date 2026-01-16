@@ -21,7 +21,6 @@ RUN pacman -Syyu --noconfirm \
   man \
   man-pages \
   7zip \
-  adobe-source-code-pro-fonts \
   atuin \
   clang \
   cmake \
@@ -48,9 +47,6 @@ RUN pacman -Syyu --noconfirm \
   starship \
   sudo \
   systemd \
-  ttf-nerd-fonts-symbols \
-  ttf-roboto-mono \
-  ttf-roboto-mono-nerd \
   vim \
   wget \
   which \
