@@ -81,6 +81,11 @@ RUN git clone https://github.com/b3niup/numbers.vim.git ~/.vim/pack/numbers/star
 # vim pony syntax highlighting plugin
 RUN git clone https://github.com/dleonard0/pony-vim-syntax.git ~/.vim/pack/pony-vim-syntax/start/pony-vim-syntax
 
+# scooter find/replace
+RUN wget https://github.com/thomasschafer/scooter/releases/download/v0.8.4/scooter-v0.8.4-x86_64-unknown-linux-musl.tar.gz \
+  && tar xf scooter* \
+  && mv scooter /home/sean/bin/
+
 WORKDIR /home/sean
 
 RUN rm -rf /home/sean/tmp/*
