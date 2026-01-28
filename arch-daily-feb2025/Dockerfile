@@ -36,6 +36,7 @@ RUN pacman -Syyu --noconfirm \
   gnupg \
   helix \
   htop \
+  inetutils \
   jq \
   lldb \
   lsof \
