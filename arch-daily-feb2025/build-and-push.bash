@@ -7,11 +7,8 @@ DOCKERFILE_DIR="$(dirname "$0")"
 NAME="ghcr.io/seantallen/wsl-environments-arch-daily-feb2025"
 
 # with date as tag
-TAG_AS=$(date +%Y%m%d)
-docker build --pull -t "${NAME}:${TAG_AS}" "${DOCKERFILE_DIR}"
-docker push "${NAME}:${TAG_AS}"
+TODAY=$(date +%Y%m%d)
+docker build --pull -t "${NAME}:${TODAY}" -t "${NAME}:latest" \
+  "${DOCKERFILE_DIR}"
+docker push "${NAME}" --all-tags
 
-# with latest as tag
-TAG_AS="latest"
-docker build --pull -t "${NAME}:${TAG_AS}" "${DOCKERFILE_DIR}"
-docker push "${NAME}:${TAG_AS}"
