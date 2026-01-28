@@ -33,6 +33,7 @@ RUN pacman -Syyu --noconfirm \
   fisher \
   fzf \
   git \
+  git-delta \
   gnupg \
   helix \
   htop \
