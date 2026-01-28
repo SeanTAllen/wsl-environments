@@ -25,6 +25,7 @@ RUN pacman -Syyu --noconfirm \
   curl \
   dnsutils \
   docker \
+  docker-compose \
   fd \
   fish \
   fisher \
