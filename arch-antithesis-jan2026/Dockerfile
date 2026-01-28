@@ -33,6 +33,7 @@ RUN pacman -Syyu --noconfirm \
   gnupg \
   helix \
   htop \
+  inetutils \
   jq \
   lsof \
   make \
