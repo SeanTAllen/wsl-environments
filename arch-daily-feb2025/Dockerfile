@@ -34,6 +34,7 @@ RUN pacman -Syyu --noconfirm \
   fzf \
   git \
   gnupg \
+  helix \
   htop \
   jq \
   lldb \
