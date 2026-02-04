@@ -94,3 +94,5 @@ RUN yadm clone https://github.com/SeanTAllen/yadm-dotfiles.git \
  && fish -c "fisher install jethrokuan/z"
 
 RUN ln -s /usr/sbin/pinentry-tty ~/bin/pinentry-tty
+
+RUN curl -fsSL https://claude.ai/install.sh | bash

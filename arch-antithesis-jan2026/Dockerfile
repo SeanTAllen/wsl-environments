@@ -22,6 +22,8 @@ RUN pacman -Syyu --noconfirm \
   man-pages \
   7zip \
   atuin \
+  clang \
+  cmake \
   curl \
   dnsutils \
   docker \
@@ -37,9 +39,11 @@ RUN pacman -Syyu --noconfirm \
   htop \
   inetutils \
   jq \
+  lldb \
   lsof \
   make \
   openssh \
+  python3 \
   ripgrep \
   shellcheck \
   starship \
@@ -79,3 +83,5 @@ RUN yadm clone https://github.com/SeanTAllen/yadm-dotfiles.git \
  && yadm checkout /home/sean
  
 RUN ln -s /usr/sbin/pinentry-tty ~/bin/pinentry-tty
+
+RUN curl -fsSL https://claude.ai/install.sh | bash
