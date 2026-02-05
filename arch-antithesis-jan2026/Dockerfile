@@ -42,6 +42,7 @@ RUN pacman -Syyu --noconfirm \
   lldb \
   lsof \
   make \
+  openbsd-netcat \
   openssh \
   python3 \
   ripgrep \
