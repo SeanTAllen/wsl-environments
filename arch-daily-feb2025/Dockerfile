@@ -58,6 +58,10 @@ RUN pacman -Syyu --noconfirm \
   yazi \
   zoxide
 
+# Fix slow docker startup in WSL by removing network-online.target dependency
+RUN sed -i 's/After=network-online.target /After=/' /usr/lib/systemd/system/docker.service \
+ && sed -i 's/Wants=network-online.target /Wants=/' /usr/lib/systemd/system/docker.service
+
 RUN groupadd sean \
  && useradd -ms /usr/bin/fish -d /home/sean -G adm,docker,wheel -g sean sean \
  && echo "sean:password" | chpasswd
