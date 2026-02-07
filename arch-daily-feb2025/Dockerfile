@@ -34,6 +34,7 @@ RUN pacman -Syyu --noconfirm \
   fzf \
   git \
   git-delta \
+  github-cli \
   gnupg \
   helix \
   htop \
