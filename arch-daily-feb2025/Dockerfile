@@ -53,6 +53,7 @@ RUN pacman -Syyu --noconfirm \
   sudo \
   systemd \
   vim \
+  websocat \
   wget \
   which \
   yadm \
