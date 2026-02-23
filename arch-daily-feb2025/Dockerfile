@@ -52,6 +52,7 @@ RUN pacman -Syyu --noconfirm \
   starship \
   sudo \
   systemd \
+  vegeta \
   vim \
   websocat \
   wget \
