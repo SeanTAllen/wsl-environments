@@ -47,6 +47,7 @@ RUN pacman -Syyu --noconfirm \
   openssh \
   openssl \
   pcre2 \
+  poppler \
   ripgrep \
   shellcheck \
   starship \
