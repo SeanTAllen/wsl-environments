@@ -48,6 +48,7 @@ RUN pacman -Syyu --noconfirm \
   openssl \
   pcre2 \
   poppler \
+  qemu-base \
   ripgrep \
   shellcheck \
   starship \
