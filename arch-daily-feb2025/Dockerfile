@@ -21,6 +21,7 @@ RUN pacman -Syyu --noconfirm \
   man \
   man-pages \
   7zip \
+  age \
   atuin \
   clang \
   cmake \
@@ -35,6 +36,7 @@ RUN pacman -Syyu --noconfirm \
   git \
   git-delta \
   github-cli \
+  gitleaks \
   gnupg \
   helix \
   htop \
@@ -73,14 +75,9 @@ RUN groupadd sean \
 
  USER sean
 
- RUN mkdir -p ~/code/ponylang \
-  && mkdir -p ~/code/seantallen \
-  && mkdir -p ~/code/seantallen-org \
-  && mkdir -p ~/bin \
-  && mkdir -p ~/pony-scratch \
-  && mkdir -p ~/tmp \
-  && mkdir ~/.ssh \
-  && chmod 700 ~/.ssh
+ RUN mkdir -p ~/code/ponylang ~/code/seantallen ~/code/seantallen-org \
+    ~/bin ~/pony-scratch ~/tmp \
+  && mkdir -p -m 700 ~/.config/sops/age ~/.ssh
 
 WORKDIR /home/sean/tmp
 
