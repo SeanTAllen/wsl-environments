@@ -1,0 +1,217 @@
+# From this directory: sudo distrobuilder build-incus incus.yaml --import-into-incus=arch-antithesis
+image:
+  distribution: archlinux
+  architecture: x86_64
+  variant: antithesis
+
+source:
+  downloader: archlinux-http
+  url: https://geo.mirror.pkgbuild.com/iso/
+  keyserver: hkps://keyserver.ubuntu.com:443
+  keys:
+    - 3E80CA1A8B89F69CBA57D98A76A5EF9054449A5C
+
+mappings:
+  architecture_map: archlinux
+
+files:
+  - generator: hostname
+    path: /etc/hostname
+    name: hostname
+  - generator: hosts
+    path: /etc/hosts
+    name: hosts
+  - generator: copy
+    source: nsswitch.conf
+    path: /etc/nsswitch.conf
+  - generator: copy
+    source: pacman.conf
+    path: /etc/pacman.conf
+  - generator: dump
+    path: /etc/systemd/network/eth0.network
+    content: |-
+      [Match]
+      Name=eth0
+
+      [Network]
+      DHCP=ipv4
+
+      [DHCPv4]
+      ClientIdentifier=mac
+      UseDomains=true
+      UseMTU=true
+  - generator: dump
+    path: /etc/fish/conf.d/incus-wayland.fish
+    content: |-
+      if test (id -u) -eq 1000
+          set -gx XDG_RUNTIME_DIR /run/user/1000
+          set -gx WAYLAND_DISPLAY wayland-1
+          set -gx XDG_SESSION_TYPE wayland
+      end
+  - generator: dump
+    path: /usr/local/bin/code
+    mode: "0755"
+    content: |-
+      #!/bin/sh
+      exec /opt/vscode/bin/code --ozone-platform=wayland "$@"
+  - generator: dump
+    path: /etc/systemd/system/yadm-alt.service
+    content: |-
+      [Unit]
+      Description=Select Sean's dotfiles for this container hostname
+      After=local-fs.target
+
+      [Service]
+      Type=oneshot
+      User=sean
+      WorkingDirectory=/home/sean
+      ExecStart=/usr/bin/yadm alt
+
+      [Install]
+      WantedBy=multi-user.target
+  - generator: dump
+    path: /etc/systemd/system/pacman-init.service
+    content: |-
+      [Unit]
+      Description=Initialize the container's pacman keyring
+      Before=archlinux-keyring-wkd-sync.service
+      ConditionPathExists=!/etc/pacman.d/gnupg/.incus-populated
+
+      [Service]
+      Type=oneshot
+      ExecStart=/usr/bin/pacman-key --init
+      ExecStart=/usr/bin/pacman-key --populate archlinux
+      ExecStartPost=/usr/bin/touch /etc/pacman.d/gnupg/.incus-populated
+
+      [Install]
+      WantedBy=multi-user.target
+
+packages:
+  manager: pacman
+  update: true
+  cleanup: true
+  sets:
+    - action: install
+      packages:
+        - base
+        - systemd-sysvcompat
+        - iproute2
+        - iputils
+        - man-db
+        - man-pages
+        - 7zip
+        - atuin
+        - clang
+        - cmake
+        - curl
+        - dnsutils
+        - docker
+        - docker-compose
+        - fd
+        - fish
+        - fisher
+        - fzf
+        - git
+        - git-delta
+        - github-cli
+        - gnupg
+        - helix
+        - htop
+        - inetutils
+        - jq
+        - lldb
+        - lsof
+        - make
+        - openbsd-netcat
+        - openssh
+        - python
+        - ripgrep
+        - shellcheck
+        - starship
+        - sudo
+        - systemd
+        - vim
+        - wget
+        - which
+        - yadm
+        - yazi
+        - zoxide
+        - wl-clipboard
+        - mesa
+        - vulkan-intel
+        - ghostty-terminfo
+        - zed
+        - openai-codex
+        - gtk3
+        - nss
+        - libxss
+        - libxkbfile
+        - libsecret
+        - alsa-lib
+        - ttf-roboto-mono
+        - ttf-inconsolata
+        - ttf-anonymous-pro
+        - ttf-ubuntu-font-family
+        - ttf-fira-code
+        - adobe-source-code-pro-fonts
+        - ttf-cascadia-code
+        - ttf-jetbrains-mono
+        - ttf-roboto-mono-nerd
+        - ttf-nerd-fonts-symbols
+
+actions:
+  - trigger: post-unpack
+    action: |-
+      #!/bin/sh
+      set -eu
+      touch /etc/hostname /etc/hosts
+      echo "Server = https://geo.mirror.pkgbuild.com/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist
+      sed -i '/^\[community\]/,/^$/d' /etc/pacman.conf
+      pacman -Sy --needed --noconfirm archlinux-keyring
+      groupadd --gid 107 docker
+  - trigger: post-packages
+    action: |-
+      #!/bin/bash
+      set -euo pipefail
+      echo 'en_US.UTF-8 UTF-8' > /etc/locale.gen
+      locale-gen
+      echo 'LANG=en_US.UTF-8' > /etc/locale.conf
+
+      groupadd --gid 1000 sean
+      useradd --uid 1000 --gid sean --groups adm,docker,wheel,video,render \
+        --create-home --shell /usr/bin/fish sean
+      install -d /var/lib/systemd/linger
+      touch /var/lib/systemd/linger/sean
+
+      release=$(curl -fsSL https://update.code.visualstudio.com/api/update/linux-x64/stable/latest)
+      archive=$(mktemp)
+      curl -fsSL "$(jq -er .url <<< "$release")" -o "$archive"
+      echo "$(jq -er .sha256hash <<< "$release")  $archive" | sha256sum --check
+      install -d /opt/vscode
+      tar -xzf "$archive" --no-same-owner --strip-components=1 -C /opt/vscode
+      rm "$archive"
+      ln -s /usr/bin/zeditor /usr/local/bin/zed
+
+      sudo -Hu sean bash -c '
+      set -euo pipefail
+      cd "$HOME"
+      mkdir -p ~/code/antithesis ~/bin ~/tmp
+      mkdir -p -m 700 ~/.ssh
+      curl -fsSL https://github.com/thomasschafer/scooter/releases/download/v0.8.4/scooter-v0.8.4-x86_64-unknown-linux-musl.tar.gz \
+        | tar -xz -C ~/bin scooter
+      yadm clone https://github.com/SeanTAllen/yadm-dotfiles.git
+      yadm checkout "$HOME"
+      ln -s /usr/bin/pinentry-tty ~/bin/pinentry-tty
+      curl -fsSL https://claude.ai/install.sh | bash
+      ' </dev/null
+  - trigger: post-files
+    action: |-
+      #!/bin/sh
+      set -eu
+      sed -i 's/\r$//; /^\[community\]/,/^$/d' /etc/pacman.conf
+      if mountpoint -q /etc/resolv.conf; then umount -l /etc/resolv.conf; fi
+      ln -snf /run/systemd/resolve/resolv.conf /etc/resolv.conf
+      rm -rf /etc/pacman.d/gnupg
+      rm -f /etc/ssh/ssh_host_*
+      truncate -s 0 /etc/machine-id
+      systemctl enable systemd-networkd systemd-resolved docker.socket yadm-alt pacman-init
