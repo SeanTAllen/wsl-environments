@@ -1,0 +1,25 @@
+#!/usr/bin/python3
+import os
+import socket
+import sys
+
+
+def main():
+    if len(sys.argv) != 2 or any(c in sys.argv[1] for c in "\r\n"):
+        sys.exit("Usage: open-host-browser URL")
+    try:
+        with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as conn:
+            conn.settimeout(10)
+            conn.connect("/run/host-browser.sock")
+            conn.sendall(os.fsencode(sys.argv[1]) + b"\n")
+            with conn.makefile("rb") as stream:
+                response = stream.readline(256)
+    except OSError:
+        sys.exit("Could not reach the host browser service.")
+    if response != b"OK\n":
+        sys.exit(response.decode("utf-8", errors="replace").strip() or
+                 "The host browser service closed without a reply.")
+
+
+if __name__ == "__main__":
+    main()

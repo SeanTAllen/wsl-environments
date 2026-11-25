@@ -27,6 +27,14 @@ files:
   - generator: copy
     source: pacman.conf
     path: /etc/pacman.conf
+  - generator: copy
+    source: ../incus/open-host-browser
+    path: /usr/local/bin/open-host-browser
+    mode: "0755"
+  - generator: copy
+    source: ../incus/host-browser.fish
+    path: /etc/fish/conf.d/host-browser.fish
+    mode: "0644"
   - generator: dump
     path: /etc/systemd/network/eth0.network
     content: |-
@@ -129,6 +137,7 @@ packages:
         - openssl
         - pcre2
         - poppler
+        - python
         - qemu-base
         - ripgrep
         - shellcheck
