@@ -234,6 +234,9 @@ actions:
         | tar -xz -C ~/bin scooter
       yadm clone https://github.com/SeanTAllen/yadm-dotfiles.git
       yadm checkout "$HOME"
+      for name in .zuliprc .zuliprc-seans-agent-bot; do
+        ln -sT "/mnt/pony-zulip/$name" "$HOME/$name"
+      done
       fish -c "fisher install jethrokuan/z"
       ln -s /usr/bin/pinentry-tty ~/bin/pinentry-tty
       curl -fsSL https://claude.ai/install.sh | bash
