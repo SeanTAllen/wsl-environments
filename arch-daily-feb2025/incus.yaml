@@ -110,12 +110,16 @@ packages:
         - 7zip
         - age
         - atuin
+        - base-devel
+        - cdrtools
         - clang
+        - cloud-image-utils
         - cmake
         - curl
         - dnsutils
         - docker
         - docker-buildx
+        - expect
         - fd
         - fish
         - fisher
@@ -127,6 +131,7 @@ packages:
         - gnupg
         - helix
         - htop
+        - imagemagick
         - inetutils
         - jq
         - lldb
@@ -136,14 +141,19 @@ packages:
         - openssh
         - openssl
         - pcre2
+        - perf
         - poppler
         - python
         - qemu-base
         - ripgrep
+        - rsync
         - shellcheck
         - starship
+        - strace
         - sudo
         - systemd
+        - unzip
+        - valgrind
         - vegeta
         - vim
         - websocat
@@ -164,16 +174,12 @@ packages:
         - libxkbfile
         - libsecret
         - alsa-lib
-        - ttf-roboto-mono
         - ttf-inconsolata
         - ttf-anonymous-pro
         - ttf-ubuntu-font-family
-        - ttf-fira-code
-        - adobe-source-code-pro-fonts
         - ttf-cascadia-code
         - ttf-jetbrains-mono
         - ttf-roboto-mono-nerd
-        - ttf-nerd-fonts-symbols
 
 actions:
   - trigger: post-unpack
