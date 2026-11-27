@@ -28,6 +28,14 @@ files:
     source: pacman.conf
     path: /etc/pacman.conf
   - generator: copy
+    source: ../incus/10-dev-guest.conf
+    path: /etc/ssh/sshd_config.d/10-dev-guest.conf
+    mode: "0644"
+  - generator: copy
+    source: ../incus/sean-authorized-keys
+    path: /etc/ssh/authorized_keys.d/sean
+    mode: "0644"
+  - generator: copy
     source: ../incus/open-host-browser
     path: /usr/local/bin/open-host-browser
     mode: "0755"
@@ -138,6 +146,7 @@ packages:
         - starship
         - sudo
         - systemd
+        - tailscale
         - vim
         - wget
         - which
@@ -221,4 +230,4 @@ actions:
       rm -rf /etc/pacman.d/gnupg
       rm -f /etc/ssh/ssh_host_*
       truncate -s 0 /etc/machine-id
-      systemctl enable systemd-networkd systemd-resolved docker.socket yadm-alt pacman-init
+      systemctl enable systemd-networkd systemd-resolved docker.socket yadm-alt pacman-init sshd tailscaled
