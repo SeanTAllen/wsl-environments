@@ -149,7 +149,6 @@ packages:
         - vulkan-intel
         - ghostty-terminfo
         - zed
-        - openai-codex
         - gtk3
         - nss
         - libxss

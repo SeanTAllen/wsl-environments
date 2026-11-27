@@ -23,12 +23,16 @@ RUN pacman -Syyu --noconfirm \
   7zip \
   age \
   atuin \
+  base-devel \
+  cdrtools \
   clang \
+  cloud-image-utils \
   cmake \
   curl \
   dnsutils \
   docker \
   docker-buildx \
+  expect \
   fd \
   fish \
   fisher \
@@ -40,22 +44,30 @@ RUN pacman -Syyu --noconfirm \
   gnupg \
   helix \
   htop \
+  imagemagick \
   inetutils \
   jq \
   lldb \
   lsof \
   make \
   openbsd-netcat \
+  openai-codex \
   openssh \
   openssl \
   pcre2 \
+  perf \
   poppler \
   qemu-base \
   ripgrep \
+  rsync \
   shellcheck \
   starship \
+  strace \
   sudo \
   systemd \
+  ttf-jetbrains-mono \
+  unzip \
+  valgrind \
   vegeta \
   vim \
   websocat \
