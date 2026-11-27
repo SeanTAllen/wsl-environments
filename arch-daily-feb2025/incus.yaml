@@ -214,7 +214,7 @@ actions:
       rm "$archive"
       ln -s /usr/bin/zeditor /usr/local/bin/zed
 
-      sudo -Hu sean bash -c '
+      setpriv --reuid=sean --regid=sean --init-groups --reset-env -- bash -c '
       set -euo pipefail
       cd "$HOME"
       mkdir -p ~/code/ponylang ~/code/seantallen ~/code/seantallen-org ~/pony-scratch ~/bin ~/tmp
